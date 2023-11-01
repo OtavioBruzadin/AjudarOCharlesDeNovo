@@ -9,6 +9,7 @@ FILE  *ListaDeAlunos;
 FILE *ListaAuxiliar;
 FILE *ListaOrdenadaAlunos;
 
+
 char fieldContent[40];
 
 
@@ -27,17 +28,15 @@ void writeOnFile(char*content ){
 
 int generateRandomInt(int numCap){
     int num;
-    srand(2000000*time(NULL));
     num = rand() % numCap + 1;
 
     return num;
 }
 
 float generateRandomFloat() {
-
-    srand(20000000*time(NULL));
     float max = 10.0;
     float num = ((float)rand()/(float)(RAND_MAX)) * max;
+
     return num;
 }
 
@@ -72,7 +71,6 @@ char *generateStudent(int numberOfStudents){
                 readSpecificLineInFile(generateRandomInt(40)),
                 materias[generateRandomInt(3)],
                 generateRandomFloat());
-        Sleep(1000);
     }
     fclose(ListaAuxiliar);
 
@@ -104,11 +102,11 @@ char * selectField(int field, char *data){
 }
 
 int main() {
-    for (int i = 0; i < 20; ++i) {
-        generateStudent(10);
-        printf("\nterminou a %d vez",i);
 
-    }
+    srand(20000000*time(NULL));
+
+
+    generateStudent(2000);
 
     return 0;
 }
