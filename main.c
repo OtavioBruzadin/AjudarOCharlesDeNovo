@@ -106,7 +106,7 @@ int main() {
     srand(20000000*time(NULL));
 
 
-    generateStudent(2000);
+    generateStudent(200);
 
     return 0;
 }
