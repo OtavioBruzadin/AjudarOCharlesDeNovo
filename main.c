@@ -40,11 +40,11 @@ float generateRandomFloat() {
     return num;
 }
 
-char *readSpecificLineInFile(int line){
+char *readSpecificLineInFile(int line, char* fileName){
 
     char linha[90];
     char *lineContent = malloc(100 * sizeof(char));
-    ListaDeAlunos = fopen("listaDeAlunos.txt","r");
+    ListaDeAlunos = fopen(fileName,"r");
 
     strcpy(lineContent, "Minha string de exemplo");
 
@@ -59,16 +59,16 @@ char *readSpecificLineInFile(int line){
 char *generateStudent(int numberOfStudents){
     int semestre[]={1,2,3,4,5,6,7,8};
     char *materias[] = {"","portugues", "matematica", "geografia"};
-    char periodo[] = {'M','N'};
-    char sala[] = {'A','B'};
+    char periodo[] = {' ','M','N'};
+    char sala[] = {' ','A','B'};
 
     for (int i = 0; i < numberOfStudents; ++i) {
-        ListaAuxiliar = fopen("listaOrdenadaDeAlunos.txt","a");
+        ListaAuxiliar = fopen("dadosAlunos.txt","a");
 
         fprintf(ListaAuxiliar,"%c,%c,%s,%s,%.2f\n",
                 sala[generateRandomInt(2)],
                 periodo[generateRandomInt(2)],
-                readSpecificLineInFile(generateRandomInt(40)),
+                readSpecificLineInFile(generateRandomInt(40),"nomesAlunos.txt"),
                 materias[generateRandomInt(3)],
                 generateRandomFloat());
     }
@@ -104,7 +104,7 @@ char * selectField(int field, char *data){
 int main() {
 
     srand(20000000*time(NULL));
-
+    printf("%s", readSpecificLineInFile(5,"dadosAlunos.txt"));
 
     generateStudent(200);
 
