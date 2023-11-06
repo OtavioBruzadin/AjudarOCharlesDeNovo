@@ -103,10 +103,38 @@ char * selectField(int field, char *data){
 int main() {
 
     srand(20000000*time(NULL));
-    char nameContent[100];
-    printf("%s", readSpecificLineInFile(990,"dadosAlunos.txt",nameContent));
 
-    generateStudent(200000);
+    int option = 0;
+
+    while (option!=4){
+        printf("Gerar alunos aleatorios -> 1\n");
+        printf("Ordenar por nota via BubbleSort -> 2\n");
+        printf("Ordenar por nota via CleitonSort -> 3\n");
+        printf("Finalizar programa -> 4\n");
+
+        printf("Qual opcao deseja acessar?\n");
+        scanf("%d",&option);
+        if (option==1) {
+            int nOfStudents=0;
+            printf("Quantos alunos deseja gerar?: \n");
+            scanf("%d",&nOfStudents);
+            generateStudent(nOfStudents);
+        }
+        if (option==2){
+            printf("Opcao 2 yaaaay\n");
+
+        }
+        if (option==3){
+            printf("Opcao 3 yaaaay\n");
+
+        }
+
+    }
+
+
+
+    printf("Obrigado por utilizar nosso programa :)\n");
+
 
     return 0;
 }
