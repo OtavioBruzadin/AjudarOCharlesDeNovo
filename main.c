@@ -40,40 +40,39 @@ float generateRandomFloat() {
     return num;
 }
 
-char *readSpecificLineInFile(int line, char* fileName){
-
+char *readSpecificLineInFile(int line, char* fileName, char *lineContent){
     char linha[90];
-    char *lineContent = malloc(100 * sizeof(char));
     ListaDeAlunos = fopen(fileName,"r");
 
     strcpy(lineContent, "Minha string de exemplo");
 
-    for (int i = 0; i <= line; ++i) {
-        fscanf(ListaDeAlunos, "%s", linha);\
-            strcpy(lineContent, linha);
-
+    for (int i = 0; i < line; ++i) {
+        fscanf(ListaDeAlunos, "%s", linha);
+        strcpy(lineContent, linha);
     }
+
+    fclose(ListaDeAlunos);
     return lineContent;
 }
 
 char *generateStudent(int numberOfStudents){
-    int semestre[]={1,2,3,4,5,6,7,8};
-    char *materias[] = {"","portugues", "matematica", "geografia"};
-    char periodo[] = {' ','M','N'};
-    char sala[] = {' ','A','B'};
+    int semestre[8]={1,2,3,4,5,6,7,8};
+    char materias[4][30] = {"","portugues", "matematica", "geografia"};
+    char periodo[3] = {' ','M','N'};
+    char sala[3] = {' ','A','B'};
+    ListaAuxiliar = fopen("dadosAlunos.txt","a");
+    char *lineContent = malloc(100 * sizeof(char));
 
     for (int i = 0; i < numberOfStudents; ++i) {
-        ListaAuxiliar = fopen("dadosAlunos.txt","a");
-
         fprintf(ListaAuxiliar,"%c,%c,%s,%s,%.2f\n",
                 sala[generateRandomInt(2)],
                 periodo[generateRandomInt(2)],
-                readSpecificLineInFile(generateRandomInt(40),"nomesAlunos.txt"),
+                readSpecificLineInFile(generateRandomInt(40),"nomesAlunos.txt", lineContent),
                 materias[generateRandomInt(3)],
                 generateRandomFloat());
     }
+    free(lineContent);
     fclose(ListaAuxiliar);
-
 }
 
 char * selectField(int field, char *data){
@@ -104,9 +103,10 @@ char * selectField(int field, char *data){
 int main() {
 
     srand(20000000*time(NULL));
-    printf("%s", readSpecificLineInFile(5,"dadosAlunos.txt"));
+    char nameContent[100];
+    printf("%s", readSpecificLineInFile(990,"dadosAlunos.txt",nameContent));
 
-    generateStudent(200);
+    generateStudent(200000);
 
     return 0;
 }
